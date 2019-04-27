@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #clock{
+            width: 300px;
+            height: 200px;
+            border-width: 1px;
+            border:honeydew;
+            border-radius:20%;
+            position: relative;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 37px;
+            color:yellow;
+        }
+        #hour{
+            height:6px;
+            width:15%;
+            background:orange;
+            position:absolute;
+            top:50%;
+            left:35%;
+            transform-origin:right center;
+            /* 以這個div的右邊中間做為旋轉基點 */
+        }
+        #minute{
+            height:4px;
+            width:20%;
+            background:chartreuse;
+            position:absolute;
+            top:50%;
+            left:30%;
+            transform-origin:right center;
+        }
+        #second{
+            height:3px;
+            width:25%;
+            background:white;
+            position:absolute;
+            top:50%;
+            left:25%;
+            transform-origin:right center;
+        }
+        #showdate{
+            position: relative;
+            font-size: 40px;
+            color:greenyellow;
+        }
+        .wrapper{
+            width: 350px;
+            height: 620px;
+            background-image: url("woods.jpg");
+        }
+        #pendulumbox{
+            width: 200px;
+            height: 300px;
+            border-radius:5%;
+            background: black;
+            position: relative;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 37px;
+            color:yellow;
+        }
+        #pendulum{
+            height:260px;
+            width:40px;
+            position:absolute;
+            top:0%;
+            left:40%;
+            transform-origin:top center;
+        }
+        </style>
+</head>
+<body>
+ <div class="wrapper">
+     <div style="height:1px;"></div>
+    <div id="clock">
+        <p >12</p>
+        <p >9&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3</p>
+        <p >6</p>
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+    </div>
+    <div id="showdate" align="center">
+        <p ></p> 
+    </div>
+    <div id="pendulumbox">
+        <div id="pendulum"><img src="pendulum.png"></div>
+    </div>
+</div>    
+</body>
+<script>
+const hour = document.getElementById("hour");
+setInterval(function(){
+    let date=new Date();
+    // 用上面的式子去向系統要完整的日期時間
+    let yyyy = date.getFullYear();
+    let mm = date.getMonth();
+    let dd = date.getDate();
+    let hr = date.getHours();
+    let min = date.getMinutes();
+    let sec = date.getSeconds();
+    clock.style.background =`#${hr*8+min+sec}`;
+    // clock.style.background =`#${hr*20+min*160+sec*10000}`;
+    hour.style.transform =`rotate( ${hr*30+min/2+90}deg)`;//每小時走30度,div的0度為向左,所以加旋轉90度
+    minute.style.transform =`rotate( ${min*6+sec/10+90}deg)`;//每分走6度
+    second.style.transform =`rotate( ${sec*6+90}deg)`;//每秒走6度
+    showdate.innerText = yyyy+"-"+(mm+1)+"-"+dd;
+    pendulum.style.transform = `rotate( ${((sec/2)-Math.floor(sec/2))*60-15}deg)`;
+
+}, 1000);
+
+</script>
+
+</html>
