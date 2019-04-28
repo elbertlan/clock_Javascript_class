@@ -109,7 +109,8 @@ setInterval(function(){
     let hr = date.getHours();
     let min = date.getMinutes();
     let sec = date.getSeconds();
-    clock.style.background =`#${hr*8+min+sec}`;
+    // clock.style.background =`#${hr*8+min+sec}`;
+    clock.style.background =`#${Math.round(Math.random()*100)*10000+Math.round(Math.random()*100)*100+Math.round(Math.random()*100)}`;
     // clock.style.background =`#${hr*20+min*160+sec*10000}`;
     hour.style.transform =`rotate( ${hr*30+min/2+90}deg)`;//每小時走30度,div的0度為向左,所以加旋轉90度
     minute.style.transform =`rotate( ${min*6+sec/10+90}deg)`;//每分走6度
